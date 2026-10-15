@@ -1,0 +1,1 @@
+{"name":"chunk-atlas","version":"3.0.0","private":true,"type":"module","scripts":{"start":"node serve.mjs","test":"node --test tests/core.test.mjs","test:db":"node tests/v2-db.mjs","test:browser":"node tests/release-browser.mjs","test:online":"node tests/v2-online.mjs"},"devDependencies":{"@electric-sql/pglite":"0.5.9","playwright":"1.62.1"}}
